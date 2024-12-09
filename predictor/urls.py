@@ -1,7 +1,24 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
+# Define all application routes
 urlpatterns = [
-    path('', views.predict_diabetes, name='predict_diabetes'),  # Route for the form
-    path('result/', views.show_result, name='show_result'),     # Route for displaying result
+    # Default login route (home page)
+    path('', auth_views.LoginView.as_view(template_name='predictor/login.html'), name='login'),
+
+    # Login route (explicit, can be accessed directly via /login/)
+    path('login/', auth_views.LoginView.as_view(template_name='predictor/login.html'), name='login'),
+
+    # Logout route
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
+    # User registration route
+    path('register/', views.register_view, name='register'),
+
+    # User dashboard (history of predictions)
+    path('dashboard/', views.user_dashboard, name='dashboard'),
+
+    # Diabetes prediction form route
+    path('predict/', views.predict_diabetes, name='predict_diabetes'),
 ]

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Diabetes Detection</title>
+    <title>Login - Diabetes Detection</title>
     {% load static %}
     <style>
         body {
@@ -18,7 +18,7 @@
         .main-container {
             display: flex;
             width: 800px;
-            height: 670px; 
+            height: 670px;
             background-color: #fdf1db;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -132,79 +132,31 @@
     <div class="main-container">
         <!-- Image Section -->
         <div class="image-section">
-            <img src="{% static 'images/doctor_testing.jpg' %}" alt="Doctor and Patient">
-            <h1>Diabetes Prediction</h1>
-            <b><p>Predict diabetes with ease. Just fill in the required values.</b></p>
+            <img src="{% static 'images/doctor_testings.jpg' %}" alt="Doctor and Patient">
+            <h1>Login</h1>
+            <b><p>Please enter your login credentials.</b></p>
         </div>
 
         <!-- Form Section -->
         <div class="form-section">
-            <h2>Enter Your Details</h2>
-            <b><p>It's just a prediction; do consult with a doctor.</b></p>
+            <h2>Login</h2>
             <form method="post">
                 {% csrf_token %}
-                <!-- Gender Dropdown -->
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" onchange="togglePregnanciesField()" required>
-                    <option value="" disabled selected>Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
+                <!-- Username -->
+                <label for="username">Username:</label>
+                <input type="text" name="username" required>
+                
+                <!-- Password -->
+                <label for="password">Password:</label>
+                <input type="password" name="password" required>
 
-                <!-- Pregnancies Field -->
-                <div id="pregnancies-container" style="display: none;">
-                    <label for="pregnancies">Pregnancies:</label>
-                    <input type="number" id="pregnancies" name="pregnancies" min="0">
-                </div>
+                <button type="submit">Login</button>
 
-                <!-- Reset form fields -->
-                <label for="glucose">Glucose:</label>
-                <input type="number" name="glucose" required>
-
-                <label for="blood_pressure">Blood Pressure (mm Hg):</label>
-                <input type="number" name="blood_pressure" required>
-
-                <label for="skin_thickness">Skin Thickness (mm):</label>
-                <input type="number" name="skin_thickness" required>
-
-                <label for="insulin">Insulin (mu U/ml):</label>
-                <input type="number" name="insulin" required>
-
-                <label for="bmi">BMI (weight (kg)/height (m&#178;)):</label>
-                <input type="number" step="any" name="bmi" required>
-
-                <label for="diabetes_pedigree_function">Diabetes Pedigree Function:</label>
-                <input type="number" step="any" name="diabetes_pedigree_function" required>
-
-                <label for="age">Age:</label>
-                <input type="number" name="age" required>
-
-                <div class="button-container">
-                    <button type="submit">Predict Diabetes</button>
-                    <a href="{% url 'dashboard' %}" style="text-decoration: none;">
-                    <button type="button">Previous Results</button>
-                    </a>
-                    <button type="reset" style="background-color: #ff9900; color: white; margin-top: 10px; cursor: pointer;">Reset</button>
+                <div style="text-align: center; margin-top: 10px;">
+                    <p>Don't have an account? <a href="{% url 'register' %}" style="color: #ff9900; text-decoration: none;">Sign Up</a></p>
                 </div>
             </form>
         </div>
     </div>
-
-    <script>
-        function togglePregnanciesField() {
-            const gender = document.getElementById("gender").value;
-            const pregnanciesContainer = document.getElementById("pregnancies-container");
-            const pregnanciesInput = document.getElementById("pregnancies");
-
-            if (gender === "female") {
-                pregnanciesContainer.style.display = "block";
-                pregnanciesInput.required = true;
-            } else {
-                pregnanciesContainer.style.display = "none";
-                pregnanciesInput.required = false;
-                pregnanciesInput.value = ''; 
-            }
-        }
-    </script>
 </body>
 </html>

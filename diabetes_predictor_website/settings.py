@@ -52,6 +52,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'diabetes_predictor_website.urls'
 
+# Redirect users after login/logout
+LOGIN_REDIRECT_URL = '/predict/'  # Redirect to the predictor page after login
+LOGOUT_REDIRECT_URL = '/login/'   # Redirect to login page after logout
+LOGIN_URL = '/login/'             
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -117,6 +123,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'predictor' / 'static',  # Path to your static directory
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

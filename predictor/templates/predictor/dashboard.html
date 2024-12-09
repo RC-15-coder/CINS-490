@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Diabetes Prediction</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe4b5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .main-container {
+            display: flex;
+            width: 800px;
+            height: 670px;
+            background-color: #fdf1db;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-message {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            animation: fade-out 5s forwards;
+        }
+
+        @keyframes fade-out {
+            0% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+
+        .image-section, .form-section {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .image-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-section img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .image-section h1 {
+            font-size: 24px;
+            color: #f59b42;
+            margin-top: 20px;
+        }
+
+        .image-section p {
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .form-section {
+            background-color: #fff8e1;
+            border-radius: 10px;
+            padding: 10px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-section h2 {
+            color: #ff9900;
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .form-section p {
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background-color: #cc7a00;
+        }
+
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px; 
+        }
+
+        .actions form, .actions a {
+            flex: none;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .image-section, .form-section {
+                width: 100%;
+            }
+
+            .form-section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% if messages %}
+        <div class="popup-message">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="main-container">    
+        <!-- Image Section -->
+        <div class="image-section">
+            <img src="{% static 'images/doctor_testing.jpg' %}" alt="Doctor and Patient">
+            <h1>Welcome, {{ user.username }}</h1>
+            <b><p>Your Diabetes Prediction History</b></p>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <h2>Your Predictions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Prediction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for prediction in predictions %}
+                        <tr>
+                            <td>{{ prediction.timestamp|date:"Y-m-d" }}</td>
+                            <td>{{ prediction.prediction_result }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- Actions Section -->
+            <div class="actions">
+                <a href="{% url 'predict_diabetes' %}" class="button" style="text-decoration: none;">
+                    <button>Make a New Prediction</button>
+                </a>
+                <!-- Logout Button -->
+                <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -14,3 +14,7 @@ db.sqlite3
 .env
 .vscode/
 .idea/
+
+# Ignore specific unwanted files
+test_model.py
+eda.py
