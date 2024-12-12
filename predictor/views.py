@@ -95,12 +95,6 @@ def predict_diabetes(request):
 
 @login_required
 def user_dashboard(request):
-    """
-    Displays the user's prediction history.
-
-    - Handles AJAX requests to provide prediction data in JSON format.
-    - For standard requests, renders the dashboard template with the user's predictions.
-    """
     user_predictions = Prediction.objects.filter(user=request.user).order_by('-timestamp')
 
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
