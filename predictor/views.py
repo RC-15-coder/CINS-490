@@ -79,7 +79,7 @@ def predict_diabetes(request):
         # Interpret the Prediction
         result = "Diabetic" if prediction[0] == 1 else "Non-Diabetic"
 
-        # Step 8: Save the Prediction to the Database
+        # Save the Prediction to the Database
         Prediction.objects.create(
             user=request.user,              # Associate the prediction with the logged-in user
             prediction_result=result        # Save the prediction result
