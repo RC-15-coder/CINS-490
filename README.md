@@ -1,4 +1,5 @@
-Overview
+Overview:
+
 The Diabetes Prediction Web Application is a data-driven tool designed to predict the likelihood of diabetes based on user inputs such as glucose levels, blood pressure, BMI, and other health indicators. This project leverages machine learning and data preprocessing techniques to provide accurate predictions while offering an interactive and user-friendly interface.
 The goal of this project was to build a complete end-to-end solution for predicting diabetes, including a robust backend for data processing and storage, a trained ML model, and a frontend for user interaction.
 
