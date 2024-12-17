@@ -58,7 +58,7 @@ threshold = np.sort(train_scores)[7]
 # Keep only the training data points above the threshold
 train_data = train_data[train_scores > threshold]
 
-# === Step 8: Update Training and Testing Sets After Outlier Removal ===
+# Update Training and Testing Sets After Outlier Removal
 X_train = train_data.drop('Outcome', axis=1)
 y_train = train_data['Outcome']
 
